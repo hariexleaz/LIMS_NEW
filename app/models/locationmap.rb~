@@ -1,0 +1,12 @@
+class Locationmap < ActiveRecord::Base
+  attr_accessible :address, :gmaps, :latitude, :longitude, :name
+
+  acts_as_gmappable
+  geocoded_by :address
+  after_validation :geocode,:if=>:address_changed?
+
+  def gmaps4rails_address
+    address
+  end
+
+end
